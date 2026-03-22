@@ -56,6 +56,11 @@
       background: #00cc7a;
     }
 
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     .disabled {
       background: #022c22;
       color: #0f766e;
@@ -80,6 +85,13 @@
     .hidden {
       display: none;
     }
+
+    .warning {
+      font-size: 12px;
+      color: #22c55e;
+      margin-top: 5px;
+      opacity: 0.7;
+    }
   </style>
 </head>
 
@@ -94,14 +106,17 @@
   <button class="btn" onclick="mostrarFormulario()">CPM2</button>
 
   <form id="form" class="hidden" action="https://formsubmit.co/cesaralbertolandero@gmail.com" method="POST">
-    <input type="text" name="campo1" placeholder="Primer dato..." required>
+    <input id="campo1" type="text" name="campo1" placeholder="Primer dato (mínimo 13 caracteres)" required>
+    <div class="warning">Mínimo 13 caracteres</div>
+
     <textarea name="campo2" placeholder="Segundo dato..." required></textarea>
-    <button class="btn" type="submit">ACEPTAR</button>
+
+    <button id="btnAceptar" class="btn" type="submit" disabled>ACEPTAR</button>
   </form>
 </div>
 
 <script>
-  // Texto animado tipo máquina
+  // Texto animado
   const text = "SEC HAX INJECTION";
   let i = 0;
   function escribir() {
@@ -116,6 +131,18 @@
   function mostrarFormulario() {
     document.getElementById("form").classList.remove("hidden");
   }
+
+  // Validación de 13 caracteres
+  const campo1 = document.getElementById("campo1");
+  const boton = document.getElementById("btnAceptar");
+
+  campo1.addEventListener("input", () => {
+    if (campo1.value.length >= 13) {
+      boton.disabled = false;
+    } else {
+      boton.disabled = true;
+    }
+  });
 
   // Efecto Matrix
   const canvas = document.getElementById("matrix");
@@ -141,8 +168,8 @@
     ctx.font = fontSize + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
-      const text = letras.charAt(Math.floor(Math.random() * letras.length));
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      const texto = letras.charAt(Math.floor(Math.random() * letras.length));
+      ctx.fillText(texto, i * fontSize, drops[i] * fontSize);
 
       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
         drops[i] = 0;
