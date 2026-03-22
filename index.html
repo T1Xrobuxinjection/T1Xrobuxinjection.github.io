@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mi sitio</title>
+  <title>César Web</title>
   <style>
     body {
-      background: #0f172a;
+      margin: 0;
+      background: linear-gradient(135deg, #0f172a, #020617);
       color: white;
       font-family: Arial;
       text-align: center;
+    }
+
+    .container {
       margin-top: 100px;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    p {
+      color: #94a3b8;
+    }
+
+    button {
+      background: #22c55e;
+      border: none;
+      padding: 12px 20px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #16a34a;
     }
   </style>
 </head>
 <body>
-  <h1>🔥 Bienvenido a mi sitio</h1>
-  <p>Soy César y este es mi primer sitio web</p>
+  <div class="container">
+    <h1>🔥 Bienvenido a mi sitio</h1>
+    <p>Soy César y este es mi sitio web pro</p>
+    <button onclick="saludo()">Haz click</button>
+  </div>
+
+  <script>
+    function saludo() {
+      alert("Qué onda 😎");
+    }
+  </script>
 </body>
 </html>
