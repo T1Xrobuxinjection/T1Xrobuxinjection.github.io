@@ -2,68 +2,78 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>CPM</title>
+  <title>SEC HAX INJECTION</title>
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #020617, #0f172a);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      overflow: hidden;
+      font-family: monospace;
+      color: #00ff9f;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
 
     .card {
-      background: rgba(255,255,255,0.05);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.7);
       padding: 30px;
-      border-radius: 20px;
+      border-radius: 15px;
       width: 300px;
       text-align: center;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px #00ff9f;
     }
 
     h1 {
       margin-bottom: 20px;
+      font-size: 20px;
+      min-height: 25px;
     }
 
     .btn {
       display: block;
       margin: 10px auto;
-      padding: 12px;
-      border-radius: 10px;
+      padding: 10px;
+      border-radius: 8px;
       border: none;
       width: 100%;
       cursor: pointer;
-      font-size: 16px;
+      background: #00ff9f;
+      color: black;
+      font-weight: bold;
       transition: 0.3s;
     }
 
+    .btn:hover {
+      background: #00cc7a;
+    }
+
     .disabled {
-      background: #334155;
-      color: #94a3b8;
+      background: #022c22;
+      color: #0f766e;
       cursor: not-allowed;
     }
 
-    .active {
-      background: #22c55e;
-      color: white;
-    }
-
-    .active:hover {
-      background: #16a34a;
+    input, textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: black;
+      color: #00ff9f;
     }
 
     textarea {
-      width: 100%;
-      height: 100px;
-      margin-top: 15px;
-      border-radius: 10px;
-      border: none;
-      padding: 10px;
+      height: 80px;
       resize: none;
     }
 
@@ -75,27 +85,75 @@
 
 <body>
 
-  <div class="card">
+<canvas id="matrix"></canvas>
 
-    <h1>CPM</h1>
+<div class="card">
+  <h1 id="title"></h1>
 
-    <!-- Opciones -->
-    <button class="btn disabled">CPM1 (Próximamente)</button>
-    <button class="btn active" onclick="mostrarFormulario()">CPM2</button>
+  <button class="btn disabled">CPM1 (PRÓXIMAMENTE)</button>
+  <button class="btn" onclick="mostrarFormulario()">CPM2</button>
 
-    <!-- Formulario -->
-    <form id="form" class="hidden" action="https://formsubmit.co/cesaralbertolandero@gmail.com" method="POST">
-      <textarea name="mensaje" placeholder="Escribe algo..." required></textarea>
-      <button class="btn active" type="submit">Aceptar</button>
-    </form>
+  <form id="form" class="hidden" action="https://formsubmit.co/cesaralbertolandero@gmail.com" method="POST">
+    <input type="text" name="campo1" placeholder="Primer dato..." required>
+    <textarea name="campo2" placeholder="Segundo dato..." required></textarea>
+    <button class="btn" type="submit">ACEPTAR</button>
+  </form>
+</div>
 
-  </div>
-
-  <script>
-    function mostrarFormulario() {
-      document.getElementById("form").classList.remove("hidden");
+<script>
+  // Texto animado tipo máquina
+  const text = "SEC HAX INJECTION";
+  let i = 0;
+  function escribir() {
+    if (i < text.length) {
+      document.getElementById("title").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(escribir, 80);
     }
-  </script>
+  }
+  escribir();
+
+  function mostrarFormulario() {
+    document.getElementById("form").classList.remove("hidden");
+  }
+
+  // Efecto Matrix
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letras = "01";
+  const fontSize = 14;
+  const columnas = canvas.width / fontSize;
+
+  const drops = [];
+  for (let x = 0; x < columnas; x++) {
+    drops[x] = 1;
+  }
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ff9f";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letras.charAt(Math.floor(Math.random() * letras.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 35);
+</script>
 
 </body>
 </html>
