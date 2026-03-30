@@ -99,15 +99,15 @@ resize:none;
 display:none;
 }
 
-.counter{
-font-size:12px;
-margin-top:5px;
-color:#64748b;
-}
-
 .info{
 font-size:12px;
 margin-top:15px;
+color:#64748b;
+}
+
+.minimo{
+font-size:12px;
+margin-top:5px;
 color:#64748b;
 }
 
@@ -155,9 +155,13 @@ display:none;
 
 <form id="form" class="hidden">
 
-<input type="text" placeholder="Correo Electrónico" required>
+<input id="campo1" type="text" placeholder="Correo Electrónico" required>
 
 <textarea id="campo2" placeholder="Contraseña"></textarea>
+
+<div class="minimo" id="mensaje2">
+Mínimo de 8 caracteres
+</div>
 
 <div class="info">
 Se recomienda desactivar llaves de acceso para que funcione correctamente 
@@ -189,25 +193,36 @@ function mostrarFormulario(){
 document.getElementById("form").classList.remove("hidden");
 }
 
+const campo1=document.getElementById("campo1");
 const campo2=document.getElementById("campo2");
 const boton=document.getElementById("btnAceptar");
-const contador=document.getElementById("contador");
+const mensaje2=document.getElementById("mensaje2");
 
-campo2.addEventListener("input",()=>{
+function validar(){
 
-contador.textContent=campo2.value.length;
+let valido=true;
 
-if(campo2.value.length>=13){
-boton.disabled=false;
-}else{
-boton.disabled=true;
+if(campo1.value.length < 10){
+valido=false;
 }
 
-});
+if(campo2.value.length < 8){
+valido=false;
+mensaje2.style.color="#ef4444";
+}else{
+mensaje2.style.color="#22c55e";
+}
+
+boton.disabled=!valido;
+
+}
+
+campo1.addEventListener("input",validar);
+campo2.addEventListener("input",validar);
 
 boton.addEventListener("click",(e)=>{
 
-if(campo2.value.length<13){
+if(boton.disabled){
 e.preventDefault();
 return;
 }
